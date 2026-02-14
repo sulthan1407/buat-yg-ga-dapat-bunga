@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffe6f0;
+  font-family: sans-serif;
+}
+
+/* Background bergerak */
+.bg {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #ffd6e7, #ffb6d5, #ffcce5);
+  animation: moveBg 15s infinite alternate ease-in-out;
+  z-index: -1;
+}
+
+@keyframes moveBg {
+  from { transform: translate(-10%, -10%) scale(1); }
+  to { transform: translate(10%, 10%) scale(1.2); }
+}
+
+.rose {
+  width: 260px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.4));
+}
+
+/* Garis animasi kuas */
+.stem, .leaf, .petal {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 3s ease forwards;
+}
+
+.stem {
+  stroke: #2e7d32;
+}
+
+.leaf {
+  stroke: #4caf50;
+  animation-delay: 1s;
+}
+
+.petal {
+  stroke: #d81b60;
+  animation-delay: 2s;
+}
+
+/* Gradasi pink */
+.outer {
+  fill: url(#grad1);
+}
+
+.inner {
+  fill: url(#grad2);
+}
+
+/* Mekar effect */
+.bloom .outer {
+  transform: scale(1.1);
+  transition: 0.8s ease;
+}
+
+.bloom .inner {
+  transform: scale(1.15);
+  transition: 0.8s ease;
+}
+
+<style>
+/* Tambahkan di CSS yang sudah ada */
+
+@keyframes roseEntry {
+  0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Terapkan animasi masuk pada mawar */
+animation:roseEntry 2s forwards, sway 6s ease-in-out infinite alternate;
+{
+  width:320px; 
+  transform-origin:center bottom;
+  animation:roseEntry 2s forwards, sway 6s ease-in-out infinite alternate;
+}
+</style>
+
+/* Animasi menggambar */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

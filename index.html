@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rose With Falling Petals + Sound</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at center,#4a004a,#000);
+  overflow:hidden;
+}
+
+/* Glow aesthetic */
+.glow{
+  position:absolute;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle,#ff4da6 0%, transparent 70%);
+  filter:blur(100px);
+  z-index:-1;
+}
+
+/* Mawar */
+.rose{
+  width:320px; /* lebih besar */
+  transform-origin:center bottom;
+  animation:sway 6s ease-in-out infinite alternate;
+}
+
+@keyframes sway{
+  from{ transform:rotate(-1deg); }
+  to{ transform:rotate(1deg); }
+}
+
+/* Kelopak jatuh */
+.petal{
+  position:absolute;
+  width:20px;
+  height:30px;
+  background:linear-gradient(to bottom,#ff9acb,#e91e63);
+  border-radius:50% 50% 50% 50%;
+  opacity:0.8;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  0%{
+    transform:translateY(-10vh) rotate(0deg);
+    opacity:0;
+  }
+  10%{ opacity:1; }
+  100%{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Musik latar otomatis -->
+<audio id="bgMusic" autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="glow"></div>
+
+<!-- kelopak jatuh -->
+<div class="petal" style="left:10%; animation-duration:8s;"></div>
+<div class="petal" style="left:25%; animation-duration:10s;"></div>
+<div class="petal" style="left:40%; animation-duration:7s;"></div>
+<div class="petal" style="left:60%; animation-duration:9s;"></div>
+<div class="petal" style="left:75%; animation-duration:11s;"></div>
+<div class="petal" style="left:85%; animation-duration:8s;"></div>
+
+<svg viewBox="0 0 300 500" class="rose">
+
+  <defs>
+    <radialGradient id="outerGrad" cx="50%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#ffd6ec"/>
+      <stop offset="100%" stop-color="#8b0030"/>
+    </radialGradient>
+
+    <radialGradient id="innerGrad" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#ff9acb"/>
+      <stop offset="100%" stop-color="#e91e63"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Batang -->
+  <path d="M150 480 C130 360,170 320,150 210"
+        stroke="#1b5e20"
+        stroke-width="7"
+        fill="none"/>
+
+  <!-- Daun -->
+  <path d="M150 330 C60 290,100 420,150 380 Z"
+        fill="#2e7d32"/>
+
+  <path d="M150 300 C240 260,210 360,150 340 Z"
+        fill="#388e3c"/>
+
+  <!-- KELOPAK LUAR SUPER BESAR -->
+  <path fill="url(#outerGrad)"
+        d="M150 250
+           C10 210,60 40,150 90
+           C240 40,290 210,150 250 Z"/>
+
+  <!-- Layer kedua -->
+  <path fill="url(#outerGrad)"
+        d="M150 235
+           C70 190,100 110,150 135
+           C200 110,230 190,150 235 Z"/>
+
+  <!-- Layer tengah -->
+  <path fill="url(#innerGrad)"
+        d="M150 210
+           C110 170,130 140,150 150
+           C170 140,190 170,150 210 Z"/>
+
+  <!-- Dalam -->
+  <path fill="#ff5ca8"
+        d="M150 190
+           C135 165,145 150,150 155
+           C155 150,165 165,150 190 Z"/>
+
+  <!-- Spiral -->
+  <path fill="#ff80b5"
+        d="M150 180
+           C145 170,155 165,160 173
+           C158 180,150 180,150 180 Z"/>
+
+</svg>
+
+<!-- Efek suara kelopak jatuh -->
+<script>
+const petals = document.querySelectorAll('.petal');
+
+petals.forEach(petal => {
+  const fallSound = new Audio('https://www.soundjay.com/button/sounds/button-16.mp3'); // suara efek
+  petal.addEventListener('animationiteration', () => {
+    fallSound.currentTime = 0;
+    fallSound.play();
+  });
+});
+</script>
+
+</body>
+</html> 
+LV U 💗
